@@ -1,0 +1,218 @@
+.sm-main-slider {
+    height: 420px;
+    width: 100%;
+    position: relative;
+    .sm-main-slider-arrow {
+        height: 100%;
+        width: 80px;
+        position: relative;
+        @include transition(0.3s);
+        &.sm-main-slider-arrow-left {
+            float: left;
+            .sm-line-arrow.left {
+                margin-left: 10px;
+            }
+        }
+        &.sm-main-slider-arrow-right {
+                float: right;
+            .sm-line-arrow.right {
+                margin-right: 10px;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+            background: rgba($black, 0.3);
+        }
+    }
+    .sm-main-slider-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        white-space: nowrap;
+        @include transition(0.3s);
+        .sm-main-slider-slide {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            &.sm-video-slide {
+                background: $main;
+                position: relative;
+                .sm-video-slide-content {
+                    max-width: 1200px;
+                    width: 88.95478131949592%;
+                    height: 320px;
+                    margin: 0 auto;
+                    position: relative !important;
+                    @include centerer(false, true);
+                    .sm-video-slide-video-container {
+                        width: 47.5%;
+                        height: 100%;
+                        float: left;
+                        margin: 0 15px;
+                        //background-image: url("../../images/home-hero-2.png");
+                        //background-repeat: no-repeat;
+                        //background-size: 570px;
+                        position: relative;
+                        @include centerer(false, true);
+                        img {
+                            width: 100%;
+                            @include centerer(false,true);
+                        }
+                        .sm-video-slide-video-div {
+                            width: 100%;
+                            height: 83.11688311688312%;
+                            position: relative;
+                            @include centerer(true,true);
+                            input {
+                                opacity: 0;
+                                position: absolute;
+                                top: 0;
+                                pointer-events: none;
+                                display: none;
+                                &:checked ~ .sm-video-slide-video{
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                }
+                                &:checked ~ label {
+                                    opacity: 0;
+                                    pointer-events:none;
+                                }
+                            }
+                            .sm-video-slide-video{
+                                max-width: 0;
+                                max-height: 0;
+                                overflow: hidden;
+                                width: 100%;
+                                height: 100%;
+                                @include centerer(true, true);
+                                transition: 1s max-width, 1s max-height;
+                                iframe {
+                                    @include centerer(true, true);
+                                    display: block;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                            .sm-video-play-button {
+                                @include round-play-button(40px, $black, 16px)
+                            }
+                        }
+
+                    }
+                    .sm-video-slide-text-container {
+                        font-family: Cabin-regular;
+                        width: 47.5%;
+                        height: 100%;
+                        float: right;
+                        margin: 0 15px;
+                        white-space: normal;
+                        .sm-video-slide-text-container-title {
+                            color: $white;
+                            font-size: 30px;
+                            line-height: 40px;
+                            margin: 3px 0;
+                            letter-spacing: 3px;
+                        }
+                        .sm-video-slide-text-container-text {
+                            color: $white;
+                            font-size: 16px;
+                            line-height: 25px;
+                            letter-spacing: 2px;
+                            margin-top: 25px;
+                            &.sm-text-2{
+                                margin-top: 15px;
+                            }
+                        }
+                        .sm-video-slide-text-container-story {
+                            float: left;
+                            margin-top: 30px;
+                            .sm-video-slide-text-container-story-thumbnail {
+                                width: 120px;
+                                height: 65px;
+                                position: relative;
+                                img {
+                                    width: 100%;
+                                }
+                                .sm-video-slide-text-container-story-play-button {
+                                    @include round-play-button(30px, $main, 13px)
+                                }
+                            }
+                            p {
+                                margin-top: 5px;
+                                color: white;
+                                font-size: 16px;
+                                line-height: 20px;
+                                font-: extra-expanded;
+                                letter-spacing: 0.5px;
+                                @include transition(0.3s);
+
+                            }
+                            &:hover {
+                                cursor: pointer;
+                                p {
+                                    border-bottom: 1px solid $white;
+                                }
+                                .sm-video-slide-text-container-story-play-button{
+                                    cursor: pointer;
+                                    background: rgba($main, 0.8);
+                                }
+                            }
+                        }
+                        .sm-video-slide-app-store {
+                            width: 144px;
+                            height: 50px;
+                            border: 1px solid $white;
+                            float: left;
+                            margin: 30px 10px 0 30px;
+                            padding: 10px 0 10px 10px;
+                            color: $white;
+                            font-family: Roboto-regular;
+                            div {
+                                &:nth-child(1){
+                                    float: left;
+                                    font-size: 30px;
+                                    margin-right: 10px;
+                                }
+                                &:nth-child(2){
+                                    font-size: 12px;
+                                }
+                                &:nth-child(3){
+                                    font-size: 18px;
+                                    line-height: 17px;
+                                    letter-spacing: 1.5px;
+                                }
+                            }
+                        }
+                        .sm-video-slide-chrome-store {
+                            width: 205px;
+                            height: 50px;
+                            border: 1px solid $white;
+                            float: left;
+                            margin-top: 30px;
+                            padding: 10px 0 10px 10px;
+                            color: $white;
+                            font-family: Roboto-regular;
+                            div {
+                                &:nth-child(1){
+                                    float: left;
+                                    font-size: 23px;
+                                    margin-right: 10px;
+                                }
+                                &:nth-child(2){
+                                    font-size: 12px;
+                                }
+                                &:nth-child(3){
+                                    font-size: 17px;
+                                    line-height: 13px;
+                                    letter-spacing: 1px;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

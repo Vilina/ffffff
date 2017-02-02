@@ -1,0 +1,273 @@
+@font-face {
+    font-family: Lato-regular;
+    src:  url('../../../public/fonts/Lato-Regular.eot'),
+    url('../../../public/fonts/Lato-Regular.ttf'),
+    url('../../../public/fonts/Lato-Regular.woff'),
+    url('../../../public/fonts/Lato-Regular.woff2');
+}
+
+@font-face {
+    font-family: Lato-bold;
+    src:  url('../../../public/fonts/Lato-Bold.eot'),
+    url('../../../public/fonts/Lato-Bold.ttf'),
+    url('../../../public/fonts/Lato-Bold.woff'),
+    url('../../../public/fonts/Lato-Bold.woff2');
+}
+
+@font-face {
+    font-family: Cabin-regular;
+    src:  url('../../../public/fonts/Cabin-Regular.eot'),
+    url('../../../public/fonts/Cabin-Regular.ttf'),
+    url('../../../public/fonts/Cabin-Regular.woff'),
+    url('../../../public/fonts/Cabin-Regular.svg');
+}
+
+
+@font-face {
+    font-family: Roboto-regular;
+    src: url('../../../public/fonts/Roboto-Regular.eot'),
+    url('../../../public/fonts/Roboto-Regular.woff'),
+    url('../../../public/fonts/Roboto-Regular.ttf') ,
+    url('../../../public/fonts/Roboto-Regular.svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+$main: #35add4; //Main Active Color
+$main_dark: #0d47a1;// Secondary Active Color (pricr-i bg)
+$main_text_color: #555555;// Grey
+$ligh_grey: #aaaaaa;// Grey
+$white: #ffffff; // White
+$black: #000000; // Black
+
+//----- Categories Colors -----
+
+$category_math: #f44336; // Math
+$category_science: #3f51b5; // Science
+$category_language: #9c27b0; // Language
+$category_ss: #ff9800; // Social Studies
+$category_music:#4caf50; // Music
+$category_art: #35add4; // Art
+
+@mixin transition($arg) {
+    -webkit-transition: all $arg ease-in-out;
+    -moz-transition: all $arg ease-in-out;
+    -ms-transition: all $arg ease-in-out;
+    -o-transition: all $arg ease-in-out;
+    transition: all $arg ease-in-out;
+}
+
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+
+@mixin centerer($horizontal: true, $vertical: true) {
+    position: absolute;
+    @if ($horizontal and $vertical) {
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    } @else if ($horizontal) {
+        left: 50%;
+        transform: translate(-50%, 0);
+    } @else if ($vertical) {
+        top: 50%;
+        -ms-transform: translate(0, -50%);
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+}
+
+@mixin round-play-button ($width, $color, $arrow-size) {
+    width: $width;
+    height: $width;
+    border-radius: $width/2;
+    background: rgba($color, 0.5);
+    position: relative;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @include centerer(true, true);
+    //@include transition(0.3s);
+    &:before {
+        content: "\f04b";
+        color: $white;
+        margin-left: 2px;
+        @include centerer(true,true);
+        font-size: $arrow-size;
+    }
+    &:hover {
+        cursor: pointer;
+        background: rgba($main, 0.8);
+    }
+
+}
+
+@mixin round-profile-picture ($width) {
+    height: $width;
+    width: $width;
+    border-radius: $width/2;
+    overflow: hidden;
+    img {
+        width: $width;
+    }
+}
+
+.sm-close{
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+    &:hover {
+        &::before, &::after {
+            background: $main_text_color;
+        }
+    }
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        margin-top: -1px;
+        background: $main_text_color;
+    }
+    &::before {
+        @include transform(rotate(45deg));
+    }
+    &::after {
+        @include transform(rotate(-45deg));
+    }
+    &.sm-thin {
+        &::before, &::after {
+            height: 1px;
+        }
+    }
+}
+
+
+.sm-blue-button {
+    padding: 0 30px;
+    line-height: 47px;
+    height: 47px;
+    color: $white;
+    background-color: $main;
+    border-radius: 3px;
+    position: relative;
+    &:before {
+        content: '';
+        background-color: rgba($white, 0.1);
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        border-radius: 3px;
+        position: absolute;
+        opacity: 0;
+        //@include transition(0.3s)
+    }
+    &:hover {
+        cursor: pointer;
+        &:before {
+            opacity: 1;
+        }
+    }
+}
+
+.sm-white-button {
+    font-family: Cabin-regular;
+    font-size: 16px;
+    padding: 0 18px;
+    line-height: 40px;
+    height: 40px;
+    float: left;
+    color: $main_text_color;
+    background-color: $white;
+    border-radius: 3px;
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid $main_text_color;
+    //@include transition(0.3s);
+    //&:before {
+    //    content: '';
+    //    background-color: rgba($white, 0.1);
+    //    height: 100%;
+    //    width: 100%;
+    //    left: 0;
+    //    top: 0;
+    //    border-radius: 3px;
+    //    position: absolute;
+    //    opacity: 0;
+    //    @include transition(0.3s)
+    //}
+    &:hover {
+        cursor: pointer;
+        color: $main;
+        border-color: $main;
+    }
+}
+.sm-menu-button-hover {
+    &:before {
+        content: "";
+        width: 100%;
+        height: 0;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: $main;
+        @include transition(0.3s);
+    }
+    &:hover {
+        cursor: pointer;
+        color: $main;
+        &:before {
+            height: 5px;
+        }
+    }
+}
+
+.sm-opacity-hover:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+//todo MAKE MIXIN
+.sm-line-arrow {
+    position: absolute;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 9px; /*set the size for arrow*/
+    width: 4em;
+    height: 4em;
+    margin-top: -2em;
+    top: 50%;
+    &.left {
+        border-top: 2px solid $white;
+        border-left: 2px solid $white;
+        -ms-transform: rotate(-54deg) skew(-20deg);
+        -webkit-transform: rotate(-54deg) skew(-20deg);
+        transform: rotate(-54deg) skew(-20deg);
+        left: 20px;
+    }
+    &.right {
+        border-top: 2px solid $white;
+        border-right: 2px solid $white;
+        -ms-transform: rotate(54deg) skew(20deg);
+        -webkit-transform: rotate(54deg) skew(20deg);
+        transform: rotate(54deg) skew(20deg);
+        right: 20px;
+    }
+}

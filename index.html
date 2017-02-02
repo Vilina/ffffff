@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="homeController">
+<head>
+    <link rel="stylesheet" href="public/css/min/app.min.css">
+    <link rel="stylesheet" href="public/css/min/font-awesome.min.css">
+    <script src="build/node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="public/js/min/app.min.js"></script>
+</head>
+<body>
+<div class="sm-header">
+    <div class="sm-header-container sm-header-container__search-items {{activeSearch? 'sm-header-active-search': '' }}">
+        <div class="sm-header-container-search-container" tabindex="1" ng-keydown="onKeyDownSearchInput($event)">
+            <input type="text" placeholder="Search" class="sm-header-container-search-input"  focus-element="searchInputFocus" ng-model="searched">
+            <div class="sm-header-container-close">
+                <div class="sm-close sm-thin" ng-click="switchToSearch()"></div>
+            </div>
+            <div class="sm-header-container-search">
+                <div class="fa fa-search " ng-click="searchRedirect()"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="sm-header-container sm-header-container__menu-items">
+        <div class="sm-topics sm-menu-button-hover"><a href="http://www.showme.com/learn">Topics</a></div>
+        <div class="sm-pricing sm-menu-button-hover"><a href="https://www.showme.com/pricing">Pricing</a> </div>
+        <a href="http://www.showme.com/create"><div class="sm-create-showme sm-blue-button">Create a ShowMe</div></a>
+        <div class="sm-header-logo sm-logo"><a href="http://www.showme.com/"><img src="./public/images/logo.png"></a></div>
+        <a href="https://www.showme.com/signup"><div class="sm-signup sm-blue-button">Sign Up</div></a>
+        <div class="sm-login sm-menu-button-hover"><a href="https://www.showme.com/login">Log In</a></div>
+        <div class="fa fa-search sm-header-search" ng-click="switchToSearch()"></div>
+    </div>
+</div>
+
+    <main-slider></main-slider>
+    <div class="sm-main-container">
+        <div class="sm-home-block-container sm-featured-people-outer-container">
+            <div class="sm-home-block-title">
+                Featured People
+            </div>
+            <div class="sm-featured-people-container">
+                <div class="sm-featured-person" ng-repeat="featuredPerson in featuredPeopleArray">
+                    <div class="sm-featured-person-profile-picture">
+                        <img src="{{'http://media.showme.com' + featuredPerson.user_photo}}">
+                    </div>
+                    <div class="sm-featured-person-info-container">
+                        <div class="sm-featured-person-user-name"> {{featuredPerson.user_fname}}
+                            {{featuredPerson.user_lname}}
+                        </div>
+                        <div class="sm-featured-person-info"> {{featuredPerson.user_location}}</div>
+                        <div class="sm-featured-person-about"> {{featuredPerson.user_about}}</div>
+                    </div>
+                    <div class="sm-featured-person-video-container">
+                        <div class="sm-featured-person-video">
+                            <img src="{{'./public/images/featured/' + featuredPeopleVideosArray[$index] + '_1.jpg'}}">
+                            <!--<img src="{{'./public/images/featured/' + featuredPerson.id + '_1.jpg'}}">-->
+                            <div class="sm-featured-person-video-name">Video Name</div>
+                        </div>
+                        <div class="sm-featured-person-video">
+                            <img src="{{'./public/images/featured/' + featuredPeopleVideosArray[$index] + '_2.jpg'}}">
+                            <!--<img src="{{'./public/images/featured/' + featuredPerson.id + '_2.jpg'}}">-->
+                            <div class="sm-featured-person-video-name">Video Name</div>
+                        </div>
+                        <div class="sm-featured-person-video">
+                            <img src="{{'./public/images/featured/' + featuredPeopleVideosArray[$index] + '_3.jpg'}}">
+                            <!--<img src="{{'./public/images/featured/' + featuredPerson.id + '_3.jpg'}}">-->
+                            <div class="sm-featured-person-video-name">Video Name</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="sm-home-block-container sm-popular-showmes-outer-container">
+            <div class="sm-home-block-title">
+                Popular ShowMes
+            </div>
+            <div class="sm-popular-showmes-categories-container">
+                <div class="sm-popular-showmes-category " ng-repeat="category in categoriesArray">
+                    <div class="sm-popular-showmes-category-icon icon-{{category.replace(' ', '-')}}"></div>
+                    <div class="sm-popular-showmes-category-title sm-title-{{category.replace(' ', '-')}}">
+                        {{category}}
+                    </div>
+                </div>
+
+            </div>
+            <div class="sm-popular-showmes-container">
+                <div class="sm-popular-showme" ng-repeat="popularShowme in popularShowMesArray|limitTo:10">
+                    <div class="sm-popular-showme-thumbnail">
+                        <img src="{{'http://media.showme.com' + popularShowme.thumbnail}}">
+                        <div class="sm-popular-showme-prize" ng-if="popularShowme.price_label != 'Free'">
+                            {{popularShowme.price_label}}
+                        </div>
+                        <div class="sm-popular-showme-video-info">
+                            <span class="sm-popular-showme-video-likes-count"><i class="fa fa-heart-o"></i>{{popularShowme.likes}} </span>
+                            <span class="sm-popular-showme-video-views-count"><i class="fa fa-eye"></i>{{popularShowme.views|thousandSuffix}}</span>
+                            <span class="sm-popular-showme-video-duration">{{popularShowme.duration|mstohhmmss}}</span>
+                        </div>
+                    </div>
+                    <div class="sm-popular-showme-video-title">
+                        <a href="">{{popularShowme.title}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sm-show-more">
+                <div class="sm-white-button">Show More</div>
+            </div>
+        </div>
+        <div class="sm-home-block-container sm-testimonials-outer-container">
+            <div class="sm-home-block-title">
+                Testimonials
+            </div>
+
+            <div class="sm-testimonials-slider">
+                <div class="sm-testimonials-slides-container">
+                    <div class="sm-testimonials-container" ng-repeat="testimonial in testimonialsArray">
+                        <div class="sm-testimonial-profile-picture">
+                            <img src="{{testimonial.profilePictureUrl}}">
+                        </div>
+                        <div class="sm-testimonial-name">{{testimonial.name}}</div>
+                        <div class="sm-testimonial-text">{{testimonial.testimonial}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sm-testimonials-slider-arrow sm-testimonials-slider-arrow-left" ng-click="previousTestimonial()">
+                <div class="sm-line-arrow left"></div>
+            </div>
+
+            <div class="sm-testimonials-slider-arrow sm-testimonials-slider-arrow-right" ng-click="nextTestimonial()">
+                <div class="sm-line-arrow right"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="sm-footer">
+        <div class="sm-footer-container">
+            <div class="sm-footer-content-container">
+                <div class="sm-footer-content-column-left">
+                    <div><a class="sm-opacity-hover">About</a></div>
+                    <div><a class="sm-opacity-hover">Contact Us</a></div>
+                    <div><a class="sm-opacity-hover">FAQ</a></div>
+                </div>
+                <div class="sm-footer-content-column-left">
+                    <div><a class="sm-opacity-hover">PRIVACY</a></div>
+                    <div><a class="sm-opacity-hover">Terms Of Use</a></div>
+                    <div><a class="sm-opacity-hover">Copyright</a></div>
+                </div>
+                <div class="sm-footer-content-column-left">
+                    <div><a class="sm-opacity-hover">Community Guidelines</a></div>
+                    <div><a class="sm-opacity-hover">Blog</a></div>
+                    <div><a class="sm-opacity-hover">Markup App</a></div>
+                </div>
+                <div class="sm-footer-content-column-right">
+                    <div>© 2017 ShowMe. Made in NYC</div>
+                    <div class="sm-footer-content-social-icons">
+                        <a href=""><i class="fa fa-twitter"></i></a>
+                        <a href=""><i class="fa fa-facebook"></i></a>
+                        <a href=""><i class="fa fa-wordpress"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

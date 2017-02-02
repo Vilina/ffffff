@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Lato-regular;
+    overflow-x: hidden ;
+}
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+a:visited { text-decoration: none; color: inherit; }
+a:hover { text-decoration: none; color:inherit; }
+a:focus { text-decoration: none; color:inherit; }
+a:hover, a:active { text-decoration: none; color:inherit }
